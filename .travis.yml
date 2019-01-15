@@ -1,0 +1,15 @@
+language: python
+python:
+  - "3.6"
+
+before_install:
+  - chmod +x ./deploy.sh
+  - ./deploy.sh
+
+script:
+  - docker build -t ly798/cronbackup:latest .
+  - docker images ly798/cronbackup:latest
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push ly798/cronbackup:latest

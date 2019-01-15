@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  cronbackup:
+    image: ly798/cronbackup
+    container_name: cronbackup
+    restart: "always"
+    network_mode: "host"
+    volumes:
+      - ./.ssh/:/root/.ssh/
+      - ./.cronbackup/:/root/.cronbackup  # config directory
+      - /tmp/cronbackup/:/tmp/cronbackup  # backup directory
