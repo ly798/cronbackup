@@ -29,7 +29,7 @@ from apscheduler.schedulers.background import BlockingScheduler
 FILE_FORMAT = ("[%(asctime)s.%(msecs)03d][%(pathname)s:%(funcName)s]"
                "[%(levelname)s] %(message)s")
 LOG = logging.getLogger(__name__)
-CONFIG_DIR = os.path.join(os.getenv('HOME'), '.cronbackup')
+CONFIG_DIR = os.path.join(os.getenv('HOME') or '/root/', '.cronbackup')
 CONFIG_FILE = os.path.join(CONFIG_DIR, 'cronbackup.json')
 BACKUP_FILE_FORMAT = '%Y%m%d_%H%M%S'
 
@@ -69,7 +69,7 @@ def gen_task(backup_dir, sync_config, task_config):
     _backup_dir = os.path.join(
         task_backup_dir,
         '%s_%s' % (name, datetime.now().strftime(BACKUP_FILE_FORMAT)))
-    pathlib.Path(_backup_dir).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(_backup_dir).mkdir(parents=True)
     new_env = os.environ.copy()
     new_env['BACKUP_DIR'] = _backup_dir
 

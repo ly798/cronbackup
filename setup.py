@@ -11,7 +11,7 @@ for root, dirs, files in os.walk(cur_directory_path + '/.cronbackup'):
 
 setup(
     name='cronbackup',
-    version='1.0.2',
+    version='1.0.4',
     author='liuyang',
     url='',
     py_modules=['cronbackup'],
@@ -22,4 +22,9 @@ setup(
         'console_scripts': [
             'cronbackup = cronbackup:main',
         ],
-    })
+    },
+    classifiers=[
+        'Operating System :: POSIX :: Linux',
+        'Programming Language :: Python :: 2.7',
+    ]
+)
